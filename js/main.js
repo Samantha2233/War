@@ -390,7 +390,7 @@ let pSpace = document.getElementById('pSpace');
 let cWarZone = document.getElementById('c-war-zone');
 let pWarZone = document.getElementById('p-war-zone');
 
-//
+//card on table
 let cCard = null;
 let pCard = null;
 
@@ -411,17 +411,18 @@ function init() {
     //shuffle cards
     cardsArr.sort(() => 0.5 - Math.random());
     //deal cards
-    cardsArr.forEach(function(card, idx){
-        if(idx % 2 === 0) {
+    cardsArr.forEach(function(card, idx) {
+        // if(idx % 2 === 0) {
             cDeckArr.push(card);
-        } else {
+        // } else {
             pDeckArr.push(card);
         // }
-    });
+    })
 
     setScore();
-    render();
 }
+
+
 
 //click to deal top of each player's deck
 pDeck.addEventListener('click', dealTopCard);
@@ -499,35 +500,43 @@ function clearSpaces() {
 }
 
 function war() {
-    // console.log('war!');
-    // let i = 0;
-    // while(i < 4) {
-    //     // let margin = i += 2;
-    //     cWarZone.style.visibility = 'visible';
-    //     setTimeout(function() {
-    //         cCard = cDeckArr.pop();
-    //         let cWarSpot = document.createElement('div');
-    //         cWarZone.appendChild(cWarSpot);
-    //         // cWarSpot.style.marginRight = margin;
-    //     }, 1000);
-    //     pWarZone.style.visibility = 'visible';
-    //     setTimeout(function() {
-    //         pCard = pDeckArr.pop();
-    //         let pWarSpot = document.createElement('div');
-    //         pWarZone.appendChild(pWarSpot);
-    //         // pWarSpot.style.marginLeft = margin;
-    //     }, 1000);
+    console.log('war!');
+    cWarZone.style.visibility = 'visible';
+    pWarZone.style.visibility = 'visible';
+    let i = 0;
+    while(i < 4) {
+        i++;
+        console.log(i);
+        
+        cCard = cDeckArr.pop();
+        console.log('cCard popped');
+        let cWarSpot = document.createElement('div');
+        cWarSpot.style.backgroundImage = `url(${cCard.img})`;
+        cWarSpot.style.backgroundSize = 'contain';
+        cWarSpot.style.backgroundRepeat = 'no-repeat';
+        cWarSpot.style.backgroundColor = 'floralwhite';
+        cWarSpot.style.width = '13vmin';
+        cWarSpot.style.height = '18vmin';
+        cWarZone.appendChild(cWarSpot);
 
-    // }  
-
-    
+        pCard = pDeckArr.pop();
+        console.log('pCard popped');
+        let pWarSpot = document.createElement('div');
+        pWarSpot.style.backgroundImage = `url(${pCard.img})`;
+        pWarSpot.style.backgroundSize = 'contain';
+        pWarSpot.style.backgroundRepeat = 'no-repeat';
+        pWarSpot.style.backgroundColor = 'floralwhite';
+        pWarSpot.style.width = '13vmin';
+        pWarSpot.style.height = '18vmin';
+        pWarZone.appendChild(pWarSpot);
+    }  
 }
 
 function setScore() {
     cScoreCalc = cDeckArr.length + cCollectionArr.length;
     pScoreCalc = pDeckArr.length + pCollectionArr.length;
-    cScore.innerHTML = `Computer has ${cScoreCalc} cards`
-    pScore.innerHTML = `Player has ${pScoreCalc} cards`
+    cScore.innerHTML = `Computer has ${cScoreCalc} cards`;
+    pScore.innerHTML = `Player has ${pScoreCalc} cards`;
 }
 
 //if player1's card is higher than player2's card
@@ -546,6 +555,3 @@ function setScore() {
 
 
 //TODO: grab image of stack of cards
-function render() {
-    
-}
