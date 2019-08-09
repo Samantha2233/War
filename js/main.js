@@ -370,17 +370,17 @@ const cardsArr = [
 
 
 // Collected Cards
-const cCollection = document.getElementById('cCollection');
-const pCollection = document.getElementById('pCollection');
-const cCollectionArr = [];
-const pCollectionArr = [];
+let cCollection = document.getElementById('cCollection');
+let pCollection = document.getElementById('pCollection');
+let cCollectionArr = [];
+let pCollectionArr = [];
 
 
 // Decks
 let cDeck = document.getElementById('cDeck');
 let pDeck = document.getElementById('pDeck');
-const cDeckArr = [];
-const pDeckArr = [];
+let cDeckArr = [];
+let pDeckArr = [];
 
 
 // Space where card are drawn and placed
@@ -405,6 +405,10 @@ let cScore = document.getElementById('cScore');
 let pScore = document.getElementById('pScore');
 
 let warning = document.getElementById('warning');
+
+let modal = document.getElementById('modal-msg');
+let msg = document.getElementById('msg');
+let reset = document.getElementById('play-again');
 
 let winner = null;
 
@@ -433,24 +437,28 @@ function init() {
 
 
 
-////////////////   D E A L    T O P   C A R D ( )   //////////////
+////////////////   D E A L    T O P   C A R D ()   //////////////
 
 //click to deal top of each player's deck
 pDeck.addEventListener('click', dealTopCard);
 
 function dealTopCard() {
+    console.log('deal function initiated');
     //If deck is empty, push collections back into deck
-    if (cDeckArr === 0) {
-        console.log('cDeckArr is Emty')
+
+    //****** THESE TWO IF STATEMENTS DO NOT SEEM TO BE RUNNING
+    if(cDeckArr.length === 0) {
+        console.log('cDeckArr is Empty');
         cDeckArr.push(...cCollectionArr);
         cCollectionArr = [];
         cCollection.backgroundImage = "";
     }
-    if(pDeckArr === 0) {
+
+    if(pDeckArr.length === 0) {
+        console.log('pDeckArr is Empty');
         pDeckArr.push(...pCollectionArr);
         pCollectionArr = [];
         pCollection.backgroundImage = "";
-        console.log('pDeckArr is Emty')
     }
     cCard = cDeckArr.pop();
     pCard = pDeckArr.pop();
@@ -465,6 +473,9 @@ function dealTopCard() {
 ////////////////  C O M P A R E   C A R D S  ( )   //////////////// 
 
 function compareCards() {
+    console.log('compare function initiated');
+
+//////////////  I F  cCard  I S  H I G H E R /////////
     if(cCard.value > pCard.value) {
         //show that computer won this round
         setTimeout(expandWinningCard, 300);
@@ -482,40 +493,37 @@ function compareCards() {
         if(warZoneArr.length > 0) {
             // alert('computer wins!');
             cCollectionArr.push(...warZoneArr);
-            setTimeout(hideWarZone, 2000);
+            setTimeout(hideWarZone, 900);
             
-            console.log(warZoneArr);
-            console.log(cCollectionArr);
+            // console.log(warZoneArr);
+            // console.log(cCollectionArr);
 
-            setTimeout(expandWinningCard, 300);
+            setTimeout(expandWinningCard, 500);
                 function expandWinningCard() {
                 cWarZone.lastChild.classList.add('expand');
             }
-            setTimeout(contractWinningCard, 700);
+            setTimeout(contractWinningCard, 900);
             function contractWinningCard() {
                 cWarZone.lastChild.remove('expand');
             }
             warZoneArr = [];
         }
 // ---------------------------------------------------------------
-        console.log('cDeckArr', cDeckArr);
-        console.log('cCollectionArr', cCollectionArr);
+        // console.log('cDeckArr', cDeckArr);
+        // console.log('cCollectionArr', cCollectionArr);
         
-
-
-
-//////////////////   A W A R D   C A R D S ( )   ///////////////////////
-        // setTimeout(awardCards(), 1000);
-
+        setTimeout(awardCards(), 1000);
         function awardCards() {
             cCollection.style.backgroundImage = `url(${cCard.img})`;
             cCollection.style.backgroundImage = `url(${pCard.img})`;
         }
         setTimeout(clearSpaces, 1000);
-// ---------------------------------------------------------------
+
+
+////////////////////  I F  pCard  I S  H I G H E R //////////////////
 
     } else if (cCard.value < pCard.value) {
-        //show that computer won this round
+        //show that player won this round
         setTimeout(expandWinningCard, 300);
         function expandWinningCard() {
             pSpace.classList.add('expand');
@@ -533,8 +541,8 @@ function compareCards() {
             
             setTimeout(hideWarZone, 2000);
             
-            console.log('warZoneArr', warZoneArr);
-            console.log('cCollectionArr', cCollectionArr);
+            // console.log('warZoneArr', warZoneArr);
+            // console.log('pCollectionArr', pCollectionArr);
 
             setTimeout(expandWinningCard, 300);
                 function expandWinningCard() {
@@ -547,10 +555,10 @@ function compareCards() {
             warZoneArr = [];
         }
 // ---------------------------------------------------------------
-        console.log('pDeckArr', pDeckArr);
-        console.log('pCollectionArr', pCollectionArr);
+        // console.log('pDeckArr', pDeckArr);
+        // console.log('pCollectionArr', pCollectionArr);
 
-        // setTimeout(awardCards, 1000);
+        setTimeout(awardCards, 1000);
         function awardCards() {
             pCollection.style.backgroundImage = `url(${pCard.img})`;
             pCollection.style.backgroundImage = `url(${cCard.img})`;
@@ -563,12 +571,6 @@ function compareCards() {
 }
 
 // ---------------------------------------------------------------
-
-
-
-
-
-
 
 
 function hideWarZone() {
@@ -592,12 +594,25 @@ function war() {
     let i = 0;
     while(i < 4) {
         i++;
-        setTimeout(()=>{
-            warning.classList.add('war');
+        warning.classList.add('war');
+        // setTimeout(()=>{
+            if(cDeckArr.length === 0) {
+                console.log('cDeckArr is Empty');
+                cDeckArr.push(...cCollectionArr);
+                cCollectionArr = [];
+                cCollection.backgroundImage = "";
+            }
+        
+            if(pDeckArr.length === 0) {
+                console.log('pDeckArr is Empty');
+                pDeckArr.push(...pCollectionArr);
+                pCollectionArr = [];
+                pCollection.backgroundImage = "";
+            }
             cCard = cDeckArr.pop();
             console.log('cCard popped');
             warZoneArr.push(cCard);
-            console.log('warZoneArr', warZoneArr);
+            console.log('warZoneArr after cCard push', warZoneArr);
             let cWarSpot = document.createElement('div');
             cWarSpot.style.backgroundImage = `url(${cCard.img})`;
             cWarSpot.style.backgroundSize = 'contain';
@@ -613,10 +628,10 @@ function war() {
             pCard = pDeckArr.pop();
             console.log('pCard popped');
             warZoneArr.push(pCard);
-            console.log('warZoneArr', warZoneArr);
+            console.log('warZoneArr after pCard push', warZoneArr);
             let pWarSpot = document.createElement('div');
             pWarSpot.style.backgroundImage = `url(${pCard.img})`;
-            pWarSpot.style.backgroundSize = 'contain';
+            pWarSpot.style.backgroundSize = 'contain';``
             pWarSpot.style.backgroundRepeat = 'no-repeat';
             pWarSpot.style.backgroundColor = 'floralwhite';
             pWarSpot.style.width = '13vmin';
@@ -626,13 +641,18 @@ function war() {
             pWarSpot.classList.add('card');
             pWarZone.appendChild(pWarSpot);
             warning.classList.remove('war');
-        }, i * 300);
-        if(i = 3) {
-            console.log(warZoneArr);
-            setTimeout(compareCards, 1000);
+        // }, i * 300);
+
+        console.log('i after while loop in war()', i)
+        
+        if(i === 3) {
+        setTimeout(compareCards, 1000);
+        console.log(warZoneArr);
         }
     }  
 }
+
+///////////////////  W I N   L O G I C ///////////////////
 
 function setScore() {
     cScoreCalc = cDeckArr.length + cCollectionArr.length;
@@ -645,30 +665,31 @@ function setScore() {
     cScore.style.paddingTop = '0';
     cScore.innerHTML = `${cScoreCalc}`;
     
-
-    
     pScore.style.fontSize = '7vmin';
     pScore.style.marginTop = '0';
     pScore.style.marginBottom = '50px';
     pScore.style.paddingTop = '0';
     pScore.innerHTML = `${pScoreCalc}`;
+
+    // pScoreCalc = 52;
+
+
+    if (pScoreCalc === 52) {
+        modal.style.display = 'block';
+        msg.innerHTML = "You win!"
+    }
+
+    if (cScoreCalc === 52) {
+        modal.style.display = 'block';
+        msg.innerHTML = "You lose..."
+    }
 }
 
+reset.addEventListener('click', restart)
 
-
-//if player1's card is higher than player2's card
-//player 1 gets the cards
-//else player two get them
-
-//if they deal the same card --> war
-//deal 4 four cards
-//(repeat) --> use modular code
-//if player1's card is higher than player2's card
-//player 1 gets the cards
-//else player two get them
-
-//when a player gets all the cards, they win
-//pop up modal window celebrating win
+function restart() {
+    init();
+}
 
 
 

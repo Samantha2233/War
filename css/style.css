@@ -203,6 +203,31 @@ p {
 
 
 
+#modal-msg {
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: none;
+    opacity: .9;
+    position: absolute;
+}
+
+#msg {
+    color: white;
+    text-align: center;
+    margin-top: 30vmin;
+}
+
+button {
+    border: 1px dashed white;
+    background-color: transparent;
+    color: white;
+    padding: 10px;
+    display:block;
+    margin: 20px auto;
+}
+
  /* --------------- I N D E X  2 --------------- */
 
  body.img {
