@@ -507,28 +507,35 @@ function war() {
     while(i < 4) {
         i++;
         console.log(i);
-        
-        cCard = cDeckArr.pop();
-        console.log('cCard popped');
-        let cWarSpot = document.createElement('div');
-        cWarSpot.style.backgroundImage = `url(${cCard.img})`;
-        cWarSpot.style.backgroundSize = 'contain';
-        cWarSpot.style.backgroundRepeat = 'no-repeat';
-        cWarSpot.style.backgroundColor = 'floralwhite';
-        cWarSpot.style.width = '13vmin';
-        cWarSpot.style.height = '18vmin';
-        cWarZone.appendChild(cWarSpot);
+        setTimeout(()=>{
+            cCard = cDeckArr.pop();
+            console.log('cCard popped');
+            let cWarSpot = document.createElement('div');
+            cWarSpot.style.backgroundImage = `url(${cCard.img})`;
+            cWarSpot.style.backgroundSize = 'contain';
+            cWarSpot.style.backgroundRepeat = 'no-repeat';
+            cWarSpot.style.backgroundColor = 'floralwhite';
+            cWarSpot.style.width = '13vmin';
+            cWarSpot.style.height = '18vmin';
 
-        pCard = pDeckArr.pop();
-        console.log('pCard popped');
-        let pWarSpot = document.createElement('div');
-        pWarSpot.style.backgroundImage = `url(${pCard.img})`;
-        pWarSpot.style.backgroundSize = 'contain';
-        pWarSpot.style.backgroundRepeat = 'no-repeat';
-        pWarSpot.style.backgroundColor = 'floralwhite';
-        pWarSpot.style.width = '13vmin';
-        pWarSpot.style.height = '18vmin';
-        pWarZone.appendChild(pWarSpot);
+            cWarSpot.style.display = 'inline-block';
+            cWarSpot.style.marginRight = '-8vmin';
+            cWarZone.appendChild(cWarSpot);
+
+            pCard = pDeckArr.pop();
+            console.log('pCard popped');
+            let pWarSpot = document.createElement('div');
+            pWarSpot.style.backgroundImage = `url(${pCard.img})`;
+            pWarSpot.style.backgroundSize = 'contain';
+            pWarSpot.style.backgroundRepeat = 'no-repeat';
+            pWarSpot.style.backgroundColor = 'floralwhite';
+            pWarSpot.style.width = '13vmin';
+            pWarSpot.style.height = '18vmin';
+
+            pWarSpot.style.display = 'inline-block';
+            pWarSpot.style.marginRight = '-8vmin';
+            pWarZone.appendChild(pWarSpot);
+        }, i * 300);
     }  
 }
 

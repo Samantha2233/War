@@ -33,6 +33,12 @@ body {
     width: 100%;
 }
 
+#player-side {
+    height: 50%;
+    width: 100%;
+    background-color: aliceblue;
+    align-self: flex-end;
+}
 
 #war-and-draw {
     display: flex;
@@ -42,12 +48,11 @@ body {
     margin-left: -250px;
 }
 
-#draw-space {
-    background-color: aquamarine;
-    width: 500px;
-    height: 200px;
+.war-zone-wrapper {
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
@@ -56,18 +61,25 @@ body {
     background-color: crimson;
     height: 200px;
     width: 500px;
-    display: flex;
-    justify-content: space-evenly;
     visibility: hidden;
+    position: relative;
 }
 
 #p-war-zone {
     background-color: crimson;
     height: 200px;
     width: 500px;
+    visibility: hidden;
+    position: relative;
+}
+
+#draw-space {
+    background-color: aquamarine;
+    width: 500px;
+    height: 200px;
     display: flex;
     justify-content: space-evenly;
-    visibility: hidden;
+    align-items: center;
 }
 
 #cSpace {
@@ -83,11 +95,6 @@ body {
 }
 
 
-#player-side {
-    height: 50%;
-    width: 100%;
-    background-color: aliceblue;
-    align-self: flex-end;
-}
+
 
 
