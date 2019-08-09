@@ -366,35 +366,37 @@ const cardsArr = [
     }
   ]
 
+////////////////    V A R I A B L E S   //////////////
 
-//Player's visual collected cards
+
+// Collected Cards
 const cCollection = document.getElementById('cCollection');
 const pCollection = document.getElementById('pCollection');
-//Player's collected cards arrays
 const cCollectionArr = [];
 const pCollectionArr = [];
 
 
-//Player's visual Decks
+// Decks
 let cDeck = document.getElementById('cDeck');
 let pDeck = document.getElementById('pDeck');
-//Player's deck arrays
 const cDeckArr = [];
 const pDeckArr = [];
 
 
-//space where card are drawn and placed
+// Space where card are drawn and placed
 let cSpace = document.getElementById('cSpace');
 let pSpace = document.getElementById('pSpace');
 
+// War Zones
 let cWarZone = document.getElementById('c-war-zone');
 let pWarZone = document.getElementById('p-war-zone');
+let warZoneArr =[];
 
-//card on table
+// Card on Table
 let cCard = null;
 let pCard = null;
 
-
+// To Calculate Score
 let cScoreCalc = 0;
 let pScoreCalc = 0;
 
@@ -402,9 +404,16 @@ let pScoreCalc = 0;
 let cScore = document.getElementById('cScore');
 let pScore = document.getElementById('pScore');
 
+let warning = document.getElementById('warning');
+
 let winner = null;
 
 
+
+
+
+
+///////////     I N I T     /////////////
 
 init();
 function init() {
@@ -412,22 +421,37 @@ function init() {
     cardsArr.sort(() => 0.5 - Math.random());
     //deal cards
     cardsArr.forEach(function(card, idx) {
-        // if(idx % 2 === 0) {
+        if(idx % 2 === 0) {
             cDeckArr.push(card);
-        // } else {
+        } else {
             pDeckArr.push(card);
-        // }
+        }
     })
-
     setScore();
 }
 
 
 
+
+////////////////   D E A L    T O P   C A R D ( )   //////////////
+
 //click to deal top of each player's deck
 pDeck.addEventListener('click', dealTopCard);
 
 function dealTopCard() {
+    //If deck is empty, push collections back into deck
+    if (cDeckArr === 0) {
+        console.log('cDeckArr is Emty')
+        cDeckArr.push(...cCollectionArr);
+        cCollectionArr = [];
+        cCollection.backgroundImage = "";
+    }
+    if(pDeckArr === 0) {
+        pDeckArr.push(...pCollectionArr);
+        pCollectionArr = [];
+        pCollection.backgroundImage = "";
+        console.log('pDeckArr is Emty')
+    }
     cCard = cDeckArr.pop();
     pCard = pDeckArr.pop();
     cSpace.style.backgroundImage = `url(${cCard.img})`;
@@ -437,61 +461,122 @@ function dealTopCard() {
 
 
 
-function compareCards() {
-    console.log(cCard.value);
-    console.log(pCard.value);
 
+////////////////  C O M P A R E   C A R D S  ( )   //////////////// 
+
+function compareCards() {
     if(cCard.value > pCard.value) {
+        //show that computer won this round
+        setTimeout(expandWinningCard, 300);
+            function expandWinningCard() {
+                cSpace.classList.add('expand');
+        }
+        setTimeout(contractWinningCard, 700);
+            function contractWinningCard() {
+                cSpace.classList.remove('expand');
+        }
+        
         //push cards into cCollectionArr
         cCollectionArr.push(cCard, pCard);
+// ---------------------------------------------------------------
+        if(warZoneArr.length > 0) {
+            // alert('computer wins!');
+            cCollectionArr.push(...warZoneArr);
+            setTimeout(hideWarZone, 2000);
+            
+            console.log(warZoneArr);
+            console.log(cCollectionArr);
 
-
+            setTimeout(expandWinningCard, 300);
+                function expandWinningCard() {
+                cWarZone.lastChild.classList.add('expand');
+            }
+            setTimeout(contractWinningCard, 700);
+            function contractWinningCard() {
+                cWarZone.lastChild.remove('expand');
+            }
+            warZoneArr = [];
+        }
+// ---------------------------------------------------------------
         console.log('cDeckArr', cDeckArr);
         console.log('cCollectionArr', cCollectionArr);
-        setTimeout(awardCards, 1000);
+        
+
+
+
+//////////////////   A W A R D   C A R D S ( )   ///////////////////////
+        // setTimeout(awardCards(), 1000);
 
         function awardCards() {
             cCollection.style.backgroundImage = `url(${cCard.img})`;
             cCollection.style.backgroundImage = `url(${pCard.img})`;
         }
-
-
         setTimeout(clearSpaces, 1000);
-        
+// ---------------------------------------------------------------
+
     } else if (cCard.value < pCard.value) {
+        //show that computer won this round
+        setTimeout(expandWinningCard, 300);
+        function expandWinningCard() {
+            pSpace.classList.add('expand');
+        }
+        setTimeout(contractWinningCard, 700);
+        function contractWinningCard() {
+            pSpace.classList.remove('expand');
+        }
         //push cards into pCollectionArr
         pCollectionArr.push(cCard, pCard);
+// ---------------------------------------------------------------
+        if(warZoneArr.length > 0) {
+            // alert('You win!');
+            pCollectionArr.push(...warZoneArr);
+            
+            setTimeout(hideWarZone, 2000);
+            
+            console.log('warZoneArr', warZoneArr);
+            console.log('cCollectionArr', cCollectionArr);
 
+            setTimeout(expandWinningCard, 300);
+                function expandWinningCard() {
+                cWarZone.lastChild.classList.add('expand');
+            }
+            setTimeout(contractWinningCard, 700);
+            function contractWinningCard() {
+                cWarZone.lastChild.classList.remove('expand');
+            }
+            warZoneArr = [];
+        }
+// ---------------------------------------------------------------
         console.log('pDeckArr', pDeckArr);
         console.log('pCollectionArr', pCollectionArr);
 
-        setTimeout(awardCards, 1000);
-
+        // setTimeout(awardCards, 1000);
         function awardCards() {
             pCollection.style.backgroundImage = `url(${pCard.img})`;
             pCollection.style.backgroundImage = `url(${cCard.img})`;
         }
-
         setTimeout(clearSpaces, 1000);
-        
     } else if (cCard.value === pCard.value) {
         war();
     }
+    
 }
 
+// ---------------------------------------------------------------
 
-//When deck end, push collections back into deck
-if (cDeckArr === 0) {
-    cDeckArr.push(...cCollectionArr);
-    cCollection.backgroundImage = "";
+
+
+
+
+
+
+
+function hideWarZone() {
+    cWarZone.innerHTML = '';
+    pWarZone.innerHTML = '';
+    cWarZone.style.visibility = 'hidden';
+    pWarZone.style.visibility = 'hidden';
 }
-
-if(pDeckArr === 0) {
-    pDeckArr.push(...pCollectionArr);
-    pCollection.backgroundImage = "";
-}
-
-
 
 function clearSpaces() {
     cSpace.style.backgroundImage = '';
@@ -503,13 +588,16 @@ function war() {
     console.log('war!');
     cWarZone.style.visibility = 'visible';
     pWarZone.style.visibility = 'visible';
+
     let i = 0;
     while(i < 4) {
         i++;
-        console.log(i);
         setTimeout(()=>{
+            warning.classList.add('war');
             cCard = cDeckArr.pop();
             console.log('cCard popped');
+            warZoneArr.push(cCard);
+            console.log('warZoneArr', warZoneArr);
             let cWarSpot = document.createElement('div');
             cWarSpot.style.backgroundImage = `url(${cCard.img})`;
             cWarSpot.style.backgroundSize = 'contain';
@@ -517,13 +605,15 @@ function war() {
             cWarSpot.style.backgroundColor = 'floralwhite';
             cWarSpot.style.width = '13vmin';
             cWarSpot.style.height = '18vmin';
-
             cWarSpot.style.display = 'inline-block';
             cWarSpot.style.marginRight = '-8vmin';
+            cWarSpot.classList.add('card');
             cWarZone.appendChild(cWarSpot);
 
             pCard = pDeckArr.pop();
             console.log('pCard popped');
+            warZoneArr.push(pCard);
+            console.log('warZoneArr', warZoneArr);
             let pWarSpot = document.createElement('div');
             pWarSpot.style.backgroundImage = `url(${pCard.img})`;
             pWarSpot.style.backgroundSize = 'contain';
@@ -531,20 +621,40 @@ function war() {
             pWarSpot.style.backgroundColor = 'floralwhite';
             pWarSpot.style.width = '13vmin';
             pWarSpot.style.height = '18vmin';
-
             pWarSpot.style.display = 'inline-block';
             pWarSpot.style.marginRight = '-8vmin';
+            pWarSpot.classList.add('card');
             pWarZone.appendChild(pWarSpot);
+            warning.classList.remove('war');
         }, i * 300);
+        if(i = 3) {
+            console.log(warZoneArr);
+            setTimeout(compareCards, 1000);
+        }
     }  
 }
 
 function setScore() {
     cScoreCalc = cDeckArr.length + cCollectionArr.length;
     pScoreCalc = pDeckArr.length + pCollectionArr.length;
-    cScore.innerHTML = `Computer has ${cScoreCalc} cards`;
-    pScore.innerHTML = `Player has ${pScoreCalc} cards`;
+    // let cards = " cards";
+    // cards.style.fontSize = "2vmin";
+    cScore.style.fontSize = '7vmin';
+    cScore.style.marginTop = '0';
+    cScore.style.marginBottom = '50px';
+    cScore.style.paddingTop = '0';
+    cScore.innerHTML = `${cScoreCalc}`;
+    
+
+    
+    pScore.style.fontSize = '7vmin';
+    pScore.style.marginTop = '0';
+    pScore.style.marginBottom = '50px';
+    pScore.style.paddingTop = '0';
+    pScore.innerHTML = `${pScoreCalc}`;
 }
+
+
 
 //if player1's card is higher than player2's card
 //player 1 gets the cards
@@ -561,4 +671,4 @@ function setScore() {
 //pop up modal window celebrating win
 
 
-//TODO: grab image of stack of cards
+

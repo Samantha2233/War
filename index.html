@@ -4,52 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Special+Elite&display=swap" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script defer src="js/main.js"></script>
     <title>War</title>
 </head>
 <body>
-    <div id="computer-side">
-        <div>
-            <div id="cCollection"></div>
-        </div>
-        <div>
+    <div id="warning"></div>
+    <img id="bg" src="images/old-paper.jpg">
+
+    <h1>WAR</h1>
+    <div id="game">
+        <div id="computer-side">
             <p id="cScore"></p>
-            <img id="cDeck" src="images/backs/red.svg">
-        </div>
-        
-    </div>
 
-    <div id="war-and-draw">
-        <div class="war-zone-wrapper">
+            <div class="card-piles">
+                <div id="cCollection" class="card"></div>
+                <img id="cDeck" class="card" src="images/backs/red.svg">
+            </div>
+
+            
+        </div>
+
+        <div id="war-and-draw">
             <div id="c-war-zone"></div>
-        </div>
-        
-        <div id = "draw-space">
-            <div>
-                <p>cSpace</p>
-                <div id="cSpace"></div>
+            <div id = "draw-space">
+                <div class="dealt-cards">
+                    <div id="cSpace" class="card"></div>
+                    <p>Enemy Card</p>
+                </div>
+                <div class="dealt-cards">
+                    <div id="pSpace" class="card"></div>  
+                    <p>Your Card</p>
+                </div>
             </div>
-            <div>
-                <p>pSpace</p>
-                <div id="pSpace"></div>  
-            </div>
-        </div>
-
-        <div class = "war-zone-wrapper">
             <div id="p-war-zone"></div>
         </div>
-    </div>
 
 
-    <div id="player-side">
-        <div>
-            <div id="pCollection"></div>
-        </div>
-        <div>
+        <div id="player-side">
             <p id="pScore"></p>
-            <img id = "pDeck" src="images/backs/red.svg">
-        </div>
+            <div class="card-piles">
+                <div id="pCollection" class="card"></div>
+                <img id = "pDeck" class="card" src="images/backs/red.svg">
+            </div>
+        </div>  
     </div>
 </body>
 </html>
