@@ -65,8 +65,8 @@ p {
     opacity: .5;
 }
 
-.victory {
-    filter: drop-shadow(.1vmin .4vmin .5vmin grey);
+.highlight {
+    filter: drop-shadow(.1vmin .4vmin .5vmin red);
 }
 
 #computer-side {

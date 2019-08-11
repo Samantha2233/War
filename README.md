@@ -1,15 +1,9 @@
 # War
+
+[Image of War](images/warss)
+
 War (also known as Battle in the United Kingdom) is a card game typically played by two players. 
 It uses a standard playing card deck.
-
-
-## Technologies Used
-HTML, CSS, JavaScript
-Adboe XD, Illustrator, Photoshop
-
-
-## Getting Started
-link to deployed website
 
 ## Instructions
 "The objective of the game is to win all of the cards. The deck is divided evenly among the players, giving each a down stack. 
@@ -21,6 +15,15 @@ down. The owner of the higher face-up card wins the war and adds all the cards o
 If the face-up cards are again equal then the battle repeats with another set of face-down/up cards. 
 This repeats until one player's face-up card is higher than their opponent's."  - Wikipedia
 
+## Technologies Used
+HTML, CSS, JavaScript
+Adboe XD, Illustrator, Photoshop
+
+
+## Getting Started
+https://samantha2233.github.io/War/
 
 ## Next Steps
-- Add phrases to display when player wins / loses
+- Add a "click here to play" under player's card 
+- Add phrases to display when player wins / loses each round
+- Take off white cards from beginning and ultimatelt animate cards going from point A to point B
