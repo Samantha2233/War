@@ -1,8 +1,8 @@
-# War
+# War (The Card game)
 War (also known as Battle in the United Kingdom) is a card game typically played by two players. 
 It uses a standard playing card deck.
 
-[Click to play War(The Card Game)](https://samantha2233.github.io/War-The-Card-Game/)
+[Click to Play](https://samantha2233.github.io/War-The-Card-Game/)
 
 ## Technologies Used
 HTML, CSS, JavaScript
