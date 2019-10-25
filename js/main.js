@@ -419,8 +419,8 @@ let winner = null;
 
 ///////////     I N I T     /////////////
 
-init();
-function init() {
+
+(function init() {
     //shuffle cards
     cardsArr.sort(() => 0.5 - Math.random());
     //deal cards
@@ -432,9 +432,9 @@ function init() {
         }
     })
     setScore();
-}
+})()
 
-
+// init();
 
 
 ////////////////   D E A L    T O P   C A R D ()   //////////////
