@@ -3,6 +3,7 @@ War (also known as Battle in the United Kingdom) is a card game typically played
 It uses a standard playing card deck.
 
 [Click to Play](https://samantha2233.github.io/War-The-Card-Game/)
+<img src="./images/screenshot.png" alt="Screenshot of Game">
 
 ## Technologies Used
 HTML, CSS, JavaScript
