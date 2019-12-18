@@ -94,9 +94,6 @@ p {
     flex-direction: column;
 }
 
-
-
-
 #c-war-zone {
     background-color: crimson;
     height: 30vh;
@@ -116,8 +113,6 @@ p {
     justify-content: center;
     align-items: center;
 }
-
-
 
 #draw-space {
     border: 2px dashed black;
@@ -149,59 +144,41 @@ p {
 #F8D2CD pink
 #F0F1F1 grey  */
 
-
-
-
-
-
-
-
-/ / / / / / /   Responsiveness: Under 800px
-
-@media only screen and (max-width: 800px) {
+/ / / / / / / Responsiveness: Under 800px @media only screen and (max-width: 800px) {
     h1 {
         display: none;
     }
-
     #game {
         flex-direction: column;
         justify-content: center;
         height: 100vh;
     }
-
     .card {
         width: 8vmin;
         height: 13vmin;
     }
-
     #computer-side {
         height: 20vh;
         padding-left: 8vmin;
     }
-
     #player-side {
         height: 20vh;
         padding-left: 8vmin;
     }
-
     #draw-space {
         height: 20vh;
         width: 100vw;
         padding: 50px 0 0 0;
     }
-
     #c-war-zone {
         height: 20vh;
         width: 100vw;
     }
-
     #p-war-zone {
         height: 20vh;
         width: 100vw;
     }
 }
-
-
 
 #modal-msg {
     background: black;
@@ -224,15 +201,14 @@ button {
     background-color: transparent;
     color: white;
     padding: 10px;
-    display:block;
+    display: block;
     margin: 20px auto;
 }
 
- /* --------------- I N D E X  2 --------------- */
+/* --------------- I N D E X  2 --------------- */
 
- body.img {
-    width: 100%
-    height: 100%;
+body.img {
+    width: 100% height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
 }
